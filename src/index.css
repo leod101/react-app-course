@@ -13,6 +13,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.completed {
+  text-decoration: line-through;
+  background-color: #1a1a1a;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
