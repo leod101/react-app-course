@@ -8,8 +8,11 @@ function App() {
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<div>home</div>} />
-          <Route path="/forbiden" element={<div>!!!!!!!!forbiden</div>} />
-          <Route path="/addquestion" element={<div> &&&&&&?????addquestion</div>} />
+          <Route path="/forbidden" element={<div>!!!!!!!!forbiden</div>} />
+          <Route
+            path="/addquestion"
+            element={<div> &&&&&&?????addquestion</div>}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

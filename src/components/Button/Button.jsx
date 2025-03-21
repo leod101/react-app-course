@@ -1,18 +1,14 @@
 import React from "react";
 import cls from "./Button.module.css";
 
-const isPrimary = "primary";
-
-function Button(props) {
-  console.log(props);
-
+function Button({ onClick, isActiv, isDisabled, children }) {
   return (
-    //<button className={isPrimary ? cls.primary : cls.btn}>text</button>;
     <button
-      className={`${cls.btn} ${isPrimary ? cls.primary : ""}`}
-      onClick={props.onClick}
+      className={`${cls.btn} ${isActiv ? cls.active : ""}`}
+      onClick={onClick}
+      disabled={isDisabled}
     >
-      {props.children}
+      {children}
     </button>
   );
 }
