@@ -10,7 +10,10 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/forbidden" element={<div>!!!!!!!!forbiden</div>} />
-          <Route path="/addquestion" element={<div> &&??addquestion</div>} />
+          <Route path="/addquestion" element={<div> &?addquestion</div>} />
+          <Route path="/question/:id" element={<div> &&?question pages</div>} />
+
+          <Route path="*" element={<div> Not 404 </div>} />
         </Route>
       </Routes>
     </BrowserRouter>
