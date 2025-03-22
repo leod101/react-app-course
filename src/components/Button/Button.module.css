@@ -19,13 +19,11 @@
 .btn:focus,
 .btn:focus-visible {
   outline: 4px auto #2f2f2f;
-  pointer-events: none;
 }
 .active {
   color: black;
   background-color: rgb(252, 191, 22);
 }
-
 
 .btn:disabled {
   opacity: 0.5;
