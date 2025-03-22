@@ -11,7 +11,7 @@ function Header() {
           <span>ReactCards</span>
         </p>
         <div>
-          <Button isDisabled={true}>Add</Button>
+          <Button isDisabled>Add</Button>
           <Button isActiv >Login</Button>
         </div>
       </header>

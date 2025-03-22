@@ -39,6 +39,7 @@ body {
   :root {
     --main-bg-color: #f5f5f5;
     --text-color: #0e0e0e;
+    
     --btn-bg-color: #303030;
     --btn-text-color: #28fcfc;
   }
@@ -48,6 +49,7 @@ body {
   :root {
     --main-bg-color: #242424;
     --text-color: #f5f5f5;
+
     --btn-bg-color: #303030;
     --btn-text-color: #ffffff;
   }
