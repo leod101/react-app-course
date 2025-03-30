@@ -5,6 +5,7 @@ import { API_URL } from "../../constants";
 import { useState } from "react";
 import { useEffect } from "react";
 import QuestionCardList from "../../components/QuestionCardList/QuestionCardList";
+import Loader from "../../components/Loader/Loader";
 
 //const cards = [];
 
@@ -30,6 +31,7 @@ function HomePage() {
 
   return (
     <>
+      <Loader></Loader>
       <QuestionCardList cards={quastions}></QuestionCardList>
     </>
   );
