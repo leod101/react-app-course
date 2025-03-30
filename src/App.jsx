@@ -1,32 +1,30 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-import Button from "./components/Button/Button";
-import Counter from "./Counter";
-import List from "./List";
+import React from "react";
+import MainLayout from "./components/MainLayout/MainLayout";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage/HomePage";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + Reactaaaa</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-      <List />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/forbidden" element={<div>!!!!!!!!forbiden</div>} />
+          <Route path="/addquestion" element={<div> &?addquestion</div>} />
+          <Route path="/question/:id" element={<div> &&?question pages</div>} />
+
+          <Route
+            path="*"
+            element={
+              <div>
+                <NotFoundPage />
+              </div>
+            }
+          />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
