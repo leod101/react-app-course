@@ -18,7 +18,7 @@ function App() {
             path="*"
             element={
               <div>
-                <NotFoundPage></NotFoundPage>
+                <NotFoundPage />
               </div>
             }
           />
