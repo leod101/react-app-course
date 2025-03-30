@@ -5,31 +5,29 @@ import { API_URL } from "../../constants";
 import { useState } from "react";
 import { useEffect } from "react";
 import QuestionCardList from "../../components/QuestionCardList/QuestionCardList";
-
-//const cards = [];
+import Loader from "../../components/Loader/Loader";
+import { delayFn } from "../../helpers/delayFn";
+import { useFetch } from "../../hooks/useFetch";
 
 function HomePage() {
   const [quastions, setQuastions] = useState([]);
 
-  const getQuestions = async () => {
-    try {
-      const response = await fetch(`${API_URL}react`);
-      const questions = await response.json();
+  const [getQuestions, isLoading, error] = useFetch(async (url) => {
+    const response = await fetch(`${API_URL}${url}`);
+    const questions = await response.json();
 
-      setQuastions(questions);
-
-      console.log("questions", questions);
-    } catch (error) {
-      console.error("Error fetching questions:", error);
-    }
-  };
+    setQuastions(questions);
+    return questions;
+  });
 
   useEffect(() => {
-    getQuestions();
+    getQuestions("react");
   }, []);
 
   return (
     <>
+      {isLoading && <Loader />}
+      {error && <p>{error}</p>}
       <QuestionCardList cards={quastions}></QuestionCardList>
     </>
   );
