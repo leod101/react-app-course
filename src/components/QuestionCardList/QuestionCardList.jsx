@@ -1,14 +1,15 @@
 import cls from "./QuestionCardList.module.css";
 import QuestionCards from "../QuestionCards/QuestionCards";
+import { memo } from "react";
 
-function QuestionCardList({ cards }) {
+const QuestionCardList = memo(({ cards }) => {
   return (
     <div className={cls.cardList}>
-      {cards.map((card, index) => {
-        return <QuestionCards key={index} card={card} />;
-      })}
+      {cards.map((card, index) => (
+        <QuestionCards key={index} card={card} />
+      ))}
     </div>
   );
-}
+});
 
 export default QuestionCardList;
