@@ -23,6 +23,7 @@ export default [
       prettier,
     },
     rules: {
+      "react/display-name": "off",
       ...js.configs.recommended.rules,
       ...react.configs.recommended.rules,
       ...react.configs["jsx-runtime"].rules,

@@ -8,9 +8,11 @@ import QuestionCardList from "../../components/QuestionCardList/QuestionCardList
 import Loader from "../../components/Loader/Loader";
 import { delayFn } from "../../helpers/delayFn";
 import { useFetch } from "../../hooks/useFetch";
+import { useRef } from "react";
 
 function HomePage() {
   const [quastions, setQuastions] = useState([]);
+  const [searchValue, setsearchValue] = useState("");
 
   const [getQuestions, isLoading, error] = useFetch(async (url) => {
     const response = await fetch(`${API_URL}${url}`);
@@ -24,8 +26,20 @@ function HomePage() {
     getQuestions("react");
   }, []);
 
+  const onSearchChangeHandler = (e) => {
+    setsearchValue(e.target.value);
+  };
+
   return (
     <>
+      <input
+        className={cls.input}
+        value={searchValue}
+        onChange={onSearchChangeHandler}
+        type="text"
+        placeholder="Search..."
+      />
+
       {isLoading && <Loader />}
       {error && <p>{error}</p>}
       <QuestionCardList cards={quastions}></QuestionCardList>
