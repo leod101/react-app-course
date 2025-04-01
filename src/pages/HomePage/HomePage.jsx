@@ -9,6 +9,7 @@ import Loader from "../../components/Loader/Loader";
 import { delayFn } from "../../helpers/delayFn";
 import { useFetch } from "../../hooks/useFetch";
 import { useRef } from "react";
+import SearchInput from "../../components/SearchInput/SearchInput";
 
 function HomePage() {
   const [quastions, setQuastions] = useState([]);
@@ -32,13 +33,9 @@ function HomePage() {
 
   return (
     <>
-      <input
-        className={cls.input}
-        value={searchValue}
-        onChange={onSearchChangeHandler}
-        type="text"
-        placeholder="Search..."
-      />
+      <div className={cls.controlsContainer}>
+        <SearchInput cards={searchValue} onChange={onSearchChangeHandler} ></SearchInput>
+      </div>
 
       {isLoading && <Loader />}
       {error && <p>{error}</p>}
