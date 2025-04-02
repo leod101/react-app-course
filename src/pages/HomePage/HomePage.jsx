@@ -11,36 +11,63 @@ import { useFetch } from "../../hooks/useFetch";
 import { useRef } from "react";
 import SearchInput from "../../components/SearchInput/SearchInput";
 import { useMemo } from "react";
+import Button from "../../components/Button/Button";
+
+const DEFAULT_PER_PAGE = 10;
 
 function HomePage() {
-  const [quastions, setQuastions] = useState([]);
-  const [searchValue, setsearchValue] = useState("");
+  const [searchParams, setSearchParams] = useState(
+    `?_page=1&_per_page=${DEFAULT_PER_PAGE}`
+  );
+  const [questions, setQuestions] = useState({ data: [], pages: 0 });
+  const [searchValue, setSearchValue] = useState("");
   const [sortSelectValue, setSortSelectValue] = useState("");
 
   const [getQuestions, isLoading, error] = useFetch(async (url) => {
     const response = await fetch(`${API_URL}${url}`);
     const questions = await response.json();
 
-    setQuastions(questions);
+    setQuestions(questions);
     return questions;
   });
 
   const cards = useMemo(() => {
-    return (quastions || []).filter((d) =>
-      d.question?.toLowerCase().includes(searchValue.trim().toLowerCase())
-    );
-  }, [quastions, searchValue]);
+    if (questions?.data.length) {
+      if (searchValue.trim()) {
+        return questions.data.filter((d) =>
+          d.question?.toLowerCase().includes(searchValue.trim().toLowerCase())
+        );
+      } else {
+        return questions.data;
+      }
+    }
+    return [];
+  }, [questions, searchValue]);
+
+  const pagination = useMemo(() => {
+    const totalCardsCount = questions?.pages || 0;
+    return Array.from({ length: totalCardsCount }, (_, i) => i + 1);
+  }, [questions]);
 
   useEffect(() => {
-    getQuestions(`react?${sortSelectValue}`);
-  }, [sortSelectValue]);
+    getQuestions(`react${searchParams} `);
+  }, [searchParams]);
 
   const onSearchChangeHandler = (e) => {
-    setsearchValue(e.target.value);
+    setSearchValue(e.target.value);
   };
 
   const onSortSelectChangeHandler = (e) => {
     setSortSelectValue(e.target.value);
+
+    setSearchParams(`?_page=1&_per_page=${DEFAULT_PER_PAGE}&${e.target.value}`);
+  };
+
+  const paginationHandler = (e) => {
+    if (e.target.tagName === "BUTTON")
+      setSearchParams(
+        `?_page=${e.target.textContent}&_per_page=${DEFAULT_PER_PAGE}&${sortSelectValue}`
+      );
   };
 
   return (
@@ -67,11 +94,18 @@ function HomePage() {
 
       {isLoading && <Loader />}
       {error && <p>{error}</p>}
-      {cards.length === 0 && !isLoading && (
-        <p className={cls.noQuestionsInfo}>No questions found</p>
-      )}
 
       <QuestionCardList cards={cards}></QuestionCardList>
+
+      {cards.length === 0 ? (
+        <p className={cls.noQuestionsInfo}>No cards...</p>
+      ) : (
+        <div className={cls.paginationContainer} onClick={paginationHandler}>
+          {pagination.map((value) => {
+            return <Button key={value}>{value}</Button>;
+          })}
+        </div>
+      )}
     </>
   );
 }
