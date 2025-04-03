@@ -23,6 +23,11 @@ function HomePage() {
   const [searchValue, setSearchValue] = useState("");
   const [sortSelectValue, setSortSelectValue] = useState("");
 
+  const controlsContainerRef = useRef();
+
+  const getActivPageNumber = () =>
+    questions.next === null ? questions.last : questions.next - 1;
+
   const [getQuestions, isLoading, error] = useFetch(async (url) => {
     const response = await fetch(`${API_URL}${url}`);
     const questions = await response.json();
@@ -68,11 +73,12 @@ function HomePage() {
       setSearchParams(
         `?_page=${e.target.textContent}&_per_page=${DEFAULT_PER_PAGE}&${sortSelectValue}`
       );
+    controlsContainerRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <>
-      <div className={cls.controlsContainer}>
+      <div className={cls.controlsContainer} ref={controlsContainerRef}>
         <SearchInput
           cards={searchValue}
           onChange={onSearchChangeHandler}
@@ -102,7 +108,11 @@ function HomePage() {
       ) : (
         <div className={cls.paginationContainer} onClick={paginationHandler}>
           {pagination.map((value) => {
-            return <Button key={value}>{value}</Button>;
+            return (
+              <Button key={value} isActiv={value === getActivPageNumber()}>
+                {value}
+              </Button>
+            );
           })}
         </div>
       )}
