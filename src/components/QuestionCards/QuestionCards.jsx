@@ -24,11 +24,9 @@ function QuestionCards({ card }) {
 
       <div className={cls.cardAnswers}>
         <label>short answer :</label>
-        <p className={cls.cardAnswer}>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum
-          recusandae aper
-        </p>
+        <p className={cls.cardAnswer}>{card.answer}</p>
       </div>
+
       <Button onClick={() => navigate(`/question/${card.id}`)}>View</Button>
     </div>
   );

@@ -43,7 +43,8 @@ body {
     --text-color: #0e0e0e;
     
     --btn-bg-color: #303030;
-    --btn-text-color: #28fcfc;
+    --btn-text-color: #f5f5f5;
+
     --card-bg-color: #ebeaea;
   }
 }
@@ -53,8 +54,9 @@ body {
     --main-bg-color: #242424;
     --text-color: #f5f5f5;
 
-    --btn-bg-color: #303030;
-    --btn-text-color: #ffffff;
+    --btn-bg-color: #0e9780;
+    --btn-text-color: #f7f7f7;
+
     --card-bg-color: #454549;
   }
 }
